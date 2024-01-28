@@ -1,13 +1,13 @@
-package cn.baizhi958216.animefesuta;
+package cn.baizhi958216.fesutacommon;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class AnimefesutaApplication {
+public class FesutaCommonApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(AnimefesutaApplication.class, args);
+        SpringApplication.run(FesutaCommonApplication.class, args);
     }
 
 }
