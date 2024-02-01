@@ -8,25 +8,42 @@
         <version>3.2.2</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+
     <groupId>cn.baizhi958216</groupId>
-    <artifactId>animefesuta</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>animefesuta</name>
-    <description>animefesuta</description>
+    <artifactId>animefesuta-backend</artifactId>
+    <version>0.0.1</version>
+    <name>animefesuta-backend</name>
+    <description>animefesuta-backend</description>
+
     <properties>
         <java.version>21</java.version>
+        <fesuta.version>0.0.1</fesuta.version>
     </properties>
-    <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
-        </dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-    </dependencies>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>fesuta-admin</module>
+        <module>fesuta-common</module>
+        <module>fesuta-web</module>
+    </modules>
+
+    <dependencyManagement>
+        <dependencies>
+
+            <dependency>
+                <groupId>cn.baizhi958216</groupId>
+                <artifactId>fesuta-common</artifactId>
+                <version>${fesuta.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>cn.baizhi958216</groupId>
+                <artifactId>fesuta-admin</artifactId>
+                <version>${fesuta.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <repositories>
         <repository>
@@ -52,29 +69,4 @@
             </snapshots>
         </pluginRepository>
     </pluginRepositories>
-
-    <modules>
-        <module>fesuta-admin</module>
-        <module>fesuta-common</module>
-    </modules>
-
-    <packaging>pom</packaging>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
-
 </project>
