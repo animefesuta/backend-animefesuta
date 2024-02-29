@@ -1,72 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.2.2</version>
-        <relativePath/> <!-- lookup parent from repository -->
-    </parent>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>3.2.3</version>
+		<relativePath /> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>cn.baizhi958216</groupId>
+	<artifactId>backend-animefesuta</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<modules>
+		<module>fesuta-common</module>
+		<module>fesuta-web</module>
+		<module>fesuta-module-shop</module>
+		<module>fesuta-module-admin</module>
+		<module>fesuta-module-system</module>
+		<module>fesuta-module-cos</module>
+		<module>fesuta-module-live</module>
+		<module>fesuta-module-forum</module>
+		<module>fesuta-module-ai</module>
+	</modules>
+	<name>backend-animefesuta</name>
+	<description>Demo project for Spring Boot</description>
+	<properties>
+		<java.version>21</java.version>
+		<maven.compiler.source>21</maven.compiler.source>
+		<maven.compiler.target>21</maven.compiler.target>
+		<maven.compiler.release>21</maven.compiler.release>
+	</properties>
 
-    <groupId>cn.baizhi958216</groupId>
-    <artifactId>animefesuta-backend</artifactId>
-    <version>0.0.1</version>
-    <name>animefesuta-backend</name>
-    <description>animefesuta-backend</description>
-
-    <properties>
-        <java.version>21</java.version>
-        <fesuta.version>0.0.1</fesuta.version>
-    </properties>
-
-    <packaging>pom</packaging>
-
-    <modules>
-        <module>fesuta-admin</module>
-        <module>fesuta-common</module>
-        <module>fesuta-web</module>
-    </modules>
-
-    <dependencyManagement>
-        <dependencies>
-
-            <dependency>
-                <groupId>cn.baizhi958216</groupId>
-                <artifactId>fesuta-common</artifactId>
-                <version>${fesuta.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>cn.baizhi958216</groupId>
-                <artifactId>fesuta-admin</artifactId>
-                <version>${fesuta.version}</version>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
-    <repositories>
-        <repository>
-            <id>aliyun</id>
-            <url>https://maven.aliyun.com/repository/public</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
-    <pluginRepositories>
-        <pluginRepository>
-            <id>aliyun</id>
-            <url>https://maven.aliyun.com/repository/public</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </pluginRepository>
-    </pluginRepositories>
 </project>
