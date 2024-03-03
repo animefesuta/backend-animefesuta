@@ -14,7 +14,7 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("/fesuta/user/fetchUsersList")
-    public List<UserVO> getAllUsers(){
+    public List<UserVO> getAllUsers() {
         return userService.getAllUsers();
     }
 

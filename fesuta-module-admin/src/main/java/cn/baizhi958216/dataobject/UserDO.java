@@ -25,6 +25,7 @@ public class UserDO extends BaseDO {
     /**
      * 用户昵称
      */
+    @NonNull
     private String nickname;
     /**
      * 用户头像
@@ -34,4 +35,9 @@ public class UserDO extends BaseDO {
      * 用户数据
      */
     private String rawUserInfo;
+    /**
+     * 用户密码
+     */
+    @NonNull
+    private String password;
 }

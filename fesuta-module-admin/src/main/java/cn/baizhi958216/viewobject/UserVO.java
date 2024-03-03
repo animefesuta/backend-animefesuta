@@ -3,6 +3,7 @@ package cn.baizhi958216.viewobject;
 import cn.baizhi958216.enums.UserTypeEnum;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 
 @Getter
@@ -18,6 +19,7 @@ public class UserVO extends BaseVO {
     /**
      * 用户昵称
      */
+    @NonNull
     private String nickname;
     /**
      * 用户头像
@@ -27,4 +29,9 @@ public class UserVO extends BaseVO {
      * 用户数据
      */
     private String rawUserInfo;
+    /**
+     * 用户密码
+     */
+    @NonNull
+    private String password;
 }

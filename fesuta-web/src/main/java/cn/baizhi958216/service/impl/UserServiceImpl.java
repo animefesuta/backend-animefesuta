@@ -24,8 +24,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserVO createUser(UserVO userVO){
+    public UserVO createUser(UserVO userVO) {
         UserDO userDO = new UserDO();
+        userDO.setNickname(userVO.getNickname());
+        userDO.setPassword(userVO.getPassword());
         userDO.setType(UserTypeEnum.USER.getType());
         userDO.setCreator(UserTypeEnum.USER.getType());
         userDO.setCreateTime(LocalDateTime.now());
@@ -37,6 +39,7 @@ public class UserServiceImpl implements UserService {
     private UserVO convertToVO(UserDO userDO) {
         UserVO userVO = new UserVO();
         userVO.setId(userDO.getId());
+        userVO.setNickname(userDO.getNickname());
         userVO.setType(userDO.getType());
         userVO.setCreator(userDO.getCreator());
         userVO.setCreateTime(userDO.getCreateTime());
