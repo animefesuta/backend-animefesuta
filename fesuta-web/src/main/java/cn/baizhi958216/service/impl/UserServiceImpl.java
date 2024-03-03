@@ -31,6 +31,7 @@ public class UserServiceImpl implements UserService {
         UserDO userDO = new UserDO();
         userDO.setNickname(userVO.getNickname());
         userDO.setPassword(userVO.getPassword());
+        userDO.setEmail(userVO.getEmail());
         userDO.setType(UserTypeEnum.USER.getType());
         userDO.setCreator(UserTypeEnum.USER.getType());
         userDO.setCreateTime(LocalDateTime.now());
@@ -92,6 +93,9 @@ public class UserServiceImpl implements UserService {
                     if (userVO.getDeleted() != null) {
                         userDO.setDeleted(userVO.getDeleted());
                     }
+                    if (userVO.getEmail() != null) {
+                        userDO.setEmail(userVO.getEmail());
+                    }
                     userDO.setUpdateTime(LocalDateTime.now());
                     userDO.setUpdater(
                             userVO.getUpdater() == null ? UserTypeEnum.ADMIN.getType() : UserTypeEnum.USER.getType());
@@ -106,6 +110,7 @@ public class UserServiceImpl implements UserService {
         userVO.setNickname(userDO.getNickname());
         userVO.setType(userDO.getType());
         userVO.setCreator(userDO.getCreator());
+        userVO.setEmail(userDO.getEmail());
         userVO.setCreateTime(userDO.getCreateTime());
         userVO.setUpdateTime(userDO.getUpdateTime());
         userVO.setUpdater(userDO.getUpdater());

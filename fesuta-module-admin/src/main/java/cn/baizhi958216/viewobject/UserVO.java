@@ -16,6 +16,10 @@ public class UserVO extends BaseVO {
      */
     private Integer type;
     /**
+     * 用户邮箱
+     */
+    private String email;
+    /**
      * 用户昵称
      */
     private String nickname;
