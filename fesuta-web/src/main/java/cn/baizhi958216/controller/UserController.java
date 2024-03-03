@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -22,4 +25,30 @@ public class UserController {
     public UserVO createUser(@RequestBody UserVO userVO) {
         return userService.createUser(userVO);
     }
+
+    @PostMapping("/fesuta/user/findUserByUUID")
+    public UserVO findUserByUUID(@RequestBody UserVO userVO) {
+        return userService.findUserByUUID(userVO.getId());
+    }
+
+    @PostMapping("/fesuta/user/findUserByNickname")
+    public List<UserVO> findUserByNickname(@RequestBody UserVO userVO) {
+        return userService.findUserByNickName(userVO.getNickname());
+    }
+
+    @PostMapping("/fesuta/user/findUserByNicknameFuzzy")
+    public List<UserVO> findUserByNicknameFuzzy(@RequestBody UserVO userVO) {
+        return userService.findUserByNickNameFuzzy(userVO.getNickname());
+    }
+
+    @PostMapping("/fesuta/user/deleteUserByUUID")
+    public Boolean deleteUserByUUID(@RequestBody UserVO userVO) {
+        return userService.deleteUserByUUID(userVO.getId());
+    }
+
+    @PostMapping("/fesuta/user/updateUserByUUID")
+    public UserVO updateUserByUUID(@RequestBody UserVO userVO) {
+        return userService.updateUserByUUID(userVO);
+    }
+
 }

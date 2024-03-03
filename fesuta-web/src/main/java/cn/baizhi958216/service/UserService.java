@@ -8,4 +8,14 @@ public interface UserService {
     List<UserVO> getAllUsers();
 
     UserVO createUser(UserVO userVO);
+
+    UserVO findUserByUUID(String uuid);
+
+    List<UserVO> findUserByNickName(String nickname);
+
+    List<UserVO> findUserByNickNameFuzzy(String nickname);
+
+    Boolean deleteUserByUUID(String uuid);
+
+    UserVO updateUserByUUID(UserVO userVO);
 }
