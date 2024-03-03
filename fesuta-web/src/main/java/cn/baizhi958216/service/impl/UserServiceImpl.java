@@ -41,6 +41,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserVO findUserByUUID(String uuid) {
+        if (uuid == null) {
+            return null;
+        }
         return userRepository.findById(uuid).map(this::convertToVO).orElse(null);
     }
 
@@ -57,6 +60,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Boolean deleteUserByUUID(String uuid) {
+        if (uuid == null) {
+            return false;
+        }
         return userRepository.findById(uuid)
                 .map(userDO -> {
                     userDO.setDeleted(true);
@@ -68,7 +74,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserVO updateUserByUUID(UserVO userVO) {
-        return userRepository.findById(userVO.getId())
+        String uuid = userVO.getId();
+        if (uuid == null) {
+            return null;
+        }
+        return userRepository.findById(uuid)
                 .map(userDO -> {
                     if (userVO.getNickname() != null) {
                         userDO.setNickname(userVO.getNickname());

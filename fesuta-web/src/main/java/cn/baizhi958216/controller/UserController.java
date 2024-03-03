@@ -1,5 +1,6 @@
 package cn.baizhi958216.controller;
 
+import cn.baizhi958216.core.ResponseResultBody;
 import cn.baizhi958216.service.UserService;
 import cn.baizhi958216.viewobject.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @RequestMapping("/api/v1")
+@ResponseResultBody
 public class UserController {
     private UserService userService;
 
