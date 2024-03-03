@@ -13,8 +13,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RestController
 @RequestMapping("/api/v1")
 public class UserController {
-    @Autowired
     private UserService userService;
+
+    @Autowired
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping("/fesuta/user/fetchUsersList")
     public List<UserVO> getAllUsers() {
