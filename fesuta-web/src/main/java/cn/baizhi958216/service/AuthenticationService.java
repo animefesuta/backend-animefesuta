@@ -1,5 +1,7 @@
 package cn.baizhi958216.service;
 
+import java.util.Optional;
+
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -35,14 +37,13 @@ public class AuthenticationService {
         return userService.createUser(userVO);
     }
 
-    public UserDO authenticate(UserVO userVO) {
+    public Optional<UserDO> authenticate(UserVO userVO) {
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
                 userVO.getEmail(),
                 userVO.getPassword());
 
         authenticationManager.authenticate(usernamePasswordAuthenticationToken);
 
-        return userRepository.findByEmail(userVO.getEmail())
-                .orElseThrow();
+        return userRepository.findByEmail(userVO.getEmail());
     }
 }

@@ -1,5 +1,9 @@
 package cn.baizhi958216.controller;
 
+import java.util.Optional;
+
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,12 +37,16 @@ public class AuthenticationController {
 
     @PostMapping("/login")
     public LoginResponse authenticate(@RequestBody UserVO userVO) {
-        UserDO authenticatedUser = authenticationService.authenticate(userVO);
+        LoginResponse loginResponse = new LoginResponse();
+        try {
+            Optional<UserDO> authenticatedUser = authenticationService.authenticate(userVO);
 
-        String jwtToken = jwtService.generateToken(authenticatedUser);
-
-        return new LoginResponse().setToken(jwtToken)
-                .setExpiresIn(jwtService.getExpirationTime());
-
+            String jwtToken = jwtService.generateToken(authenticatedUser.get());
+            loginResponse.setToken(jwtToken)
+                    .setExpiresIn(jwtService.getExpirationTime());
+        } catch (BadCredentialsException e) {
+            throw new UsernameNotFoundException("用户名或密码错误!");
+        }
+        return loginResponse;
     }
 }

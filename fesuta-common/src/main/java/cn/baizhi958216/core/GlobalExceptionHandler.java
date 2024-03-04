@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 
 import cn.baizhi958216.enums.ResponseCodeEnum;
 import cn.baizhi958216.viewobject.ResponseVO;
+import io.jsonwebtoken.ExpiredJwtException;
 import lombok.extern.slf4j.Slf4j;
 
 @ControllerAdvice
@@ -66,6 +68,14 @@ public class GlobalExceptionHandler {
             NoHandlerFoundException ex = (NoHandlerFoundException) e;
             log.error("请求地址不存在：", e);
             return ResponseVO.failure(ResponseCodeEnum.NOT_FOUND, ex.getRequestURL());
+        } else if (e instanceof UsernameNotFoundException) {
+            UsernameNotFoundException ex = (UsernameNotFoundException) e;
+            log.error("用户不存在：", e);
+            return ResponseVO.failure(ResponseCodeEnum.UNAUTHORIZED, ex.getMessage());
+        } else if (e instanceof ExpiredJwtException) {
+            ExpiredJwtException ex = (ExpiredJwtException) e;
+            log.error("token过期：", ex.getMessage());
+            return ResponseVO.failure(ResponseCodeEnum.UNAUTHORIZED, "token过期，请重新登录");
         } else {
             // 如果是系统的异常，比如空指针这些异常
             log.error("【系统异常】", e);
