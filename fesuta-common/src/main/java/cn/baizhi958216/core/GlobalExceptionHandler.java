@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
+import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
 import cn.baizhi958216.enums.ResponseCodeEnum;
@@ -76,6 +77,10 @@ public class GlobalExceptionHandler {
             ExpiredJwtException ex = (ExpiredJwtException) e;
             log.error("token过期：", ex.getMessage());
             return ResponseVO.failure(ResponseCodeEnum.UNAUTHORIZED, "token过期，请重新登录");
+        } else if (e instanceof MaxUploadSizeExceededException) {
+            MaxUploadSizeExceededException ex = (MaxUploadSizeExceededException) e;
+            log.error("上传文件过大：", ex.getMessage());
+            return ResponseVO.failure(ResponseCodeEnum.BAD_REQUEST.getCode(), ex.getMessage());
         } else {
             // 如果是系统的异常，比如空指针这些异常
             log.error("【系统异常】", e);
