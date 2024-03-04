@@ -6,70 +6,50 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data
-@EqualsAndHashCode(callSuper = true)
-public class ImageVO extends BaseVO {
-    /**
-     * 图片的唯一标识符。
-     */
-    private String image_id;
-
-    /**
-     * 图片的标题。
-     */
-    private String image_title;
-
-    /**
-     * 图片文件的URL。
-     */
-    private String image_url;
-
-    /**
-     * 图片的上传者。
-     */
-    private String image_uploader;
-
+@EqualsAndHashCode(callSuper = false)
+public class ImageVO extends FileVO {
     /**
      * 图片的描述。
      */
-    private String image_description;
+    private String imageDescription;
 
     /**
      * 图片的关键词。
      */
-    private ArrayList<String> image_keywords;
+    private ArrayList<String> imageKeywords;
 
     /**
      * 图片所属的分类。
      */
-    private ArrayList<String> image_category;
+    private ArrayList<String> imageCategory;
 
     /**
      * 图片的可见性（例如：公开、私有）。
      */
-    private String image_visibility;
+    private String imageVisibility;
 
     /**
      * 图片的下载次数。
      */
-    private Integer image_count_download;
+    private Integer imageCountDownload;
 
     /**
      * 图片的点赞数。
      */
-    private Integer image_count_likes;
+    private Integer imageCountLikes;
 
     /**
      * 图片被收藏的次数。
      */
-    private Integer image_count_collection;
+    private Integer imageCountCollection;
 
     /**
      * 图片的评论数。
      */
-    private Integer image_count_comments;
+    private Integer imageCountComments;
 
     /**
      * 图片的版权信息。
      */
-    private String image_copyright_information;
+    private String imageCopyrightInformation;
 }

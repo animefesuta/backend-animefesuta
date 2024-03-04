@@ -3,7 +3,6 @@ package cn.baizhi958216.service.impl;
 import cn.baizhi958216.core.StorageProperties;
 import cn.baizhi958216.dataobject.FileDO;
 import cn.baizhi958216.exception.StorageException;
-import cn.baizhi958216.repository.FileRepository;
 import cn.baizhi958216.service.FileService;
 import cn.baizhi958216.utils.FileMd5HashUtils;
 import cn.baizhi958216.viewobject.FileVO;
@@ -17,6 +16,8 @@ import java.nio.file.StandardCopyOption;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -24,20 +25,26 @@ import org.springframework.web.multipart.MultipartFile;
 public class FileServiceImpl implements FileService {
 
     private final Path rootLocation;
-    private final FileRepository fileRepository;
 
-    public FileServiceImpl(StorageProperties properties, FileRepository fileRepository) {
+    @Autowired
+    public FileServiceImpl(StorageProperties properties) {
         if (properties.getLocation().trim().length() == 0) {
             throw new StorageException("文件上传路径不可为空！");
         }
-        this.fileRepository = fileRepository;
+        this.rootLocation = Paths.get(properties.getLocation());
+    }
+
+    public FileServiceImpl(StorageProperties properties, String location) {
+        properties.setLocation(location);
+        if (properties.getLocation().trim().length() == 0) {
+            throw new StorageException("文件上传路径不可为空！");
+        }
         this.rootLocation = Paths.get(properties.getLocation());
     }
 
     @Override
-    public FileVO store(MultipartFile file) {
-        FileVO fileVO = new FileVO();
-        FileDO fileDO = new FileDO();
+    public <S extends FileDO, T extends FileVO> T store(S s, T t, MultipartFile file,
+            JpaRepository<S, Object> jpaRepository) {
         FileMd5HashUtils fileMd5HashUtils = new FileMd5HashUtils();
         try {
             if (file.isEmpty()) {
@@ -54,30 +61,30 @@ public class FileServiceImpl implements FileService {
             try (InputStream inputStream = file.getInputStream()) {
                 Files.copy(inputStream, destinationFile, StandardCopyOption.REPLACE_EXISTING);
                 String fileHash = fileMd5HashUtils.getFileHash256(inputStream);
-                fileDO.setId(uuid);
-                fileDO.setOriginalFileName(file.getOriginalFilename());
-                fileDO.setFileName(uuid + "_" + file.getOriginalFilename());
-                fileDO.setFileHash(fileHash);
-                fileDO.setCreateTime(LocalDateTime.now());
-                fileDO.setFilePath(destinationFile.toString());
-                fileDO.setFileSize(file.getSize());
-                fileDO.setFileType(file.getContentType());
+                s.setId(uuid);
+                s.setOriginalFileName(file.getOriginalFilename());
+                s.setFileName(uuid + "_" + file.getOriginalFilename());
+                s.setFileHash(fileHash);
+                s.setCreateTime(LocalDateTime.now());
+                s.setFilePath(destinationFile.toString());
+                s.setFileSize(file.getSize());
+                s.setFileType(file.getContentType());
 
-                fileRepository.save(fileDO);
+                jpaRepository.save(s);
 
-                fileVO.setId(fileDO.getId());
-                fileVO.setOriginalFileName(file.getOriginalFilename());
-                fileVO.setFileName(uuid + "_" + file.getOriginalFilename());
-                fileVO.setFileHash(fileHash);
-                fileVO.setCreateTime(fileDO.getCreateTime());
-                fileVO.setFilePath(destinationFile.toString());
-                fileVO.setFileSize(file.getSize());
-                fileVO.setFileType(file.getContentType());
+                t.setId(s.getId());
+                t.setOriginalFileName(file.getOriginalFilename());
+                t.setFileName(uuid + "_" + file.getOriginalFilename());
+                t.setFileHash(fileHash);
+                t.setCreateTime(s.getCreateTime());
+                t.setFilePath(destinationFile.toString());
+                t.setFileSize(file.getSize());
+                t.setFileType(file.getContentType());
             }
         } catch (IOException e) {
             throw new StorageException("文件保存失败！", e);
         }
-        return fileVO;
+        return t;
     }
 
     @Override

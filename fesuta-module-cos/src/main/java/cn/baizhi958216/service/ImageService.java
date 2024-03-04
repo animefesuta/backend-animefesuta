@@ -2,18 +2,20 @@ package cn.baizhi958216.service;
 
 import java.util.ArrayList;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import cn.baizhi958216.viewobject.ImageVO;
 
 public interface ImageService {
-    ImageVO uploadImage(ImageVO imageVO);
+    ImageVO uploadImage(MultipartFile multipartFile);
 
-    Boolean deleteImage(String image_id);
+    Boolean deleteImage(String imageId);
 
-    ImageVO getImage(String image_id);
+    ImageVO getImage(String imageId);
 
-    ImageVO updateImage(String image_id, ImageVO imageVO);
+    ImageVO updateImage(String imageId, ImageVO imageVO);
 
-    ArrayList<ImageVO> findImagesByUploader(String image_uploader);
+    ArrayList<ImageVO> findImagesByUploader(String imageUploader);
 
     ArrayList<ImageVO> findAllImages();
 
@@ -23,7 +25,7 @@ public interface ImageService {
      * @param image_title
      * @return ArrayList<ImageVO>
      */
-    ArrayList<ImageVO> findImagesByTitleFuzzy(String image_title);
+    ArrayList<ImageVO> findImagesByTitleFuzzy(String imageTitle);
 
     /**
      * 关键字模糊查询图片
@@ -31,7 +33,7 @@ public interface ImageService {
      * @param image_keywords
      * @return
      */
-    ArrayList<ImageVO> findImagesByImageKeywords(String image_keywords);
+    ArrayList<ImageVO> findImagesByImageKeywords(String imageKeywords);
 
     /**
      * 分类模糊查询图片
@@ -39,5 +41,7 @@ public interface ImageService {
      * @param image_category
      * @return
      */
-    ArrayList<ImageVO> findImagesByImageCategory(String image_category);
+    ArrayList<ImageVO> findImagesByImageCategory(String imageCategory);
+
+    public void init();
 }
