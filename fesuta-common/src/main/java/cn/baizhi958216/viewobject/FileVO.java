@@ -7,9 +7,17 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class FileVO extends BaseVO {
     /**
-     * 文件名
+     * 文件唯一标识
+     */
+    private String id;
+    /**
+     * 文件名：uuid+fileName
      */
     private String fileName;
+    /**
+     * 原始文件名
+     */
+    private String originalFileName;
     /**
      * 文件hash
      */
