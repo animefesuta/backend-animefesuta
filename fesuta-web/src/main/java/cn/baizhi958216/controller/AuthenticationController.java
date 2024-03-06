@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +17,7 @@ import cn.baizhi958216.service.AuthenticationService;
 import cn.baizhi958216.utils.JwtService;
 import cn.baizhi958216.viewobject.UserVO;
 
+@CrossOrigin
 @RequestMapping("/api/v1/auth")
 @RestController
 @ResponseResultBody

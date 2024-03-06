@@ -12,8 +12,10 @@ import cn.baizhi958216.viewobject.FileVO;
 
 import java.util.Arrays;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api/v1/common")
 public class FileUploadController {

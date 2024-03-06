@@ -7,13 +7,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import cn.baizhi958216.core.ResponseResultBody;
 import cn.baizhi958216.service.ImageService;
-import cn.baizhi958216.viewobject.FileVO;
 import cn.baizhi958216.viewobject.ImageVO;
 
 import java.util.Arrays;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 /**
  * 需求：
@@ -23,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestBody;
  * 管理员 上传 下载 公开 删除
  */
 
+@CrossOrigin
 @RestController
 @ResponseResultBody
 @RequestMapping("/api/v1/fesuta/image")
