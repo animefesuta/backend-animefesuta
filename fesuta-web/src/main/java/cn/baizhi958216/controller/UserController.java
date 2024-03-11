@@ -38,6 +38,11 @@ public class UserController {
         return userService.findUserByUUID(userVO.getId());
     }
 
+    @PostMapping("/fesuta/user/findUserByEmail")
+    public UserVO findUserByEmail(@RequestBody UserVO userVO) {
+        return userService.findUserByEmail(userVO.getEmail());
+    }
+
     @PostMapping("/fesuta/user/findUserByNickname")
     public List<UserVO> findUserByNickname(@RequestBody UserVO userVO) {
         return userService.findUserByNickName(userVO.getNickname());

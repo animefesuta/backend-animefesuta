@@ -104,6 +104,11 @@ public class UserServiceImpl implements UserService {
                 .orElse(null);
     }
 
+    @Override
+    public UserVO findUserByEmail(String useremail) {
+        return userRepository.findByEmail(useremail).map(this::convertToVO).orElse(null);
+    }
+
     private UserVO convertToVO(UserDO userDO) {
         UserVO userVO = new UserVO();
         userVO.setId(userDO.getId());

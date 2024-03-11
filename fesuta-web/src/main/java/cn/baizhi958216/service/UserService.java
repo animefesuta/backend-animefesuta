@@ -18,4 +18,6 @@ public interface UserService {
     Boolean deleteUserByUUID(String uuid);
 
     UserVO updateUserByUUID(UserVO userVO);
+
+    UserVO findUserByEmail(String useremail);
 }
