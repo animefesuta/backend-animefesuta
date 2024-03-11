@@ -23,10 +23,11 @@ public class ImageServiceImpl implements ImageService {
 
     private Path rootLocation;
     private final ImageRepository imageRepository;
-    private final FileService fileService = new FileServiceImpl(new StorageProperties(), "upload-dir/images");
+    private final FileService fileService = new FileServiceImpl(new StorageProperties(),
+            "fesuta-web/src/main/resources/public/images");
 
     public ImageServiceImpl(StorageProperties properties, ImageRepository imageRepository) {
-        properties.setLocation("upload-dir/images");
+        properties.setLocation("fesuta-web/src/main/resources/public/images");
         if (properties.getLocation().trim().length() == 0) {
             throw new StorageException("文件上传路径不可为空！");
         }

@@ -8,7 +8,7 @@ public class StorageProperties {
     /**
      * 文件保存路径，为项目根目录“upload-dir”
      */
-    private String location = "upload-dir";
+    private String location = "fesuta-web/src/main/resources/public";
 
     public String getLocation() {
         return location;
