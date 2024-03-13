@@ -4,6 +4,7 @@ import cn.baizhi958216.dataobject.UserDO;
 import cn.baizhi958216.enums.UserTypeEnum;
 import cn.baizhi958216.repository.UserRepository;
 import cn.baizhi958216.service.UserService;
+import cn.baizhi958216.utils.BaseUserInfo;
 import cn.baizhi958216.viewobject.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,7 +34,7 @@ public class UserServiceImpl implements UserService {
         userDO.setPassword(userVO.getPassword());
         userDO.setEmail(userVO.getEmail());
         userDO.setType(UserTypeEnum.USER.getType());
-        userDO.setCreator(UserTypeEnum.USER.getType());
+        userDO.setCreator(userVO.getEmail());
         userDO.setCreateTime(LocalDateTime.now());
         userDO.setUpdateTime(LocalDateTime.now());
         userDO = userRepository.save(userDO);
@@ -79,6 +80,7 @@ public class UserServiceImpl implements UserService {
         if (uuid == null) {
             return null;
         }
+        String useremail = BaseUserInfo.get("useremail");
         return userRepository.findById(uuid)
                 .map(userDO -> {
                     if (userVO.getNickname() != null) {
@@ -97,8 +99,7 @@ public class UserServiceImpl implements UserService {
                         userDO.setEmail(userVO.getEmail());
                     }
                     userDO.setUpdateTime(LocalDateTime.now());
-                    userDO.setUpdater(
-                            userVO.getUpdater() == null ? UserTypeEnum.ADMIN.getType() : UserTypeEnum.USER.getType());
+                    userDO.setUpdater(useremail);
                     return convertToVO(userRepository.save(userDO));
                 })
                 .orElse(null);

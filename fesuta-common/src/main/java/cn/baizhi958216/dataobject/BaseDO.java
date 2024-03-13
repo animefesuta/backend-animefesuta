@@ -22,11 +22,11 @@ public abstract class BaseDO implements Serializable {
     /**
      * 创建者
      */
-    private Integer creator;
+    private String creator;
     /**
      * 更新者
      */
-    private Integer updater;
+    private String updater;
     /**
      * 逻辑删除
      */

@@ -4,6 +4,7 @@ import cn.baizhi958216.core.StorageProperties;
 import cn.baizhi958216.dataobject.FileDO;
 import cn.baizhi958216.exception.StorageException;
 import cn.baizhi958216.service.FileService;
+import cn.baizhi958216.utils.BaseUserInfo;
 import cn.baizhi958216.utils.FileMd5HashUtils;
 import cn.baizhi958216.viewobject.FileVO;
 
@@ -61,7 +62,9 @@ public class FileServiceImpl implements FileService {
             try (InputStream inputStream = file.getInputStream()) {
                 Files.copy(inputStream, destinationFile, StandardCopyOption.REPLACE_EXISTING);
                 String fileHash = fileMd5HashUtils.getFileHash256(inputStream);
+                String userEmail = BaseUserInfo.get("username");
                 s.setId(uuid);
+                s.setCreator(userEmail);
                 s.setOriginalFileName(file.getOriginalFilename());
                 s.setFileName(uuid + "_" + file.getOriginalFilename());
                 s.setFileHash(fileHash);

@@ -48,6 +48,7 @@ public class ImageServiceImpl implements ImageService {
         imageVO.setFilePath(fileVO.getFilePath());
         imageVO.setFileSize(fileVO.getFileSize());
         imageVO.setFileType(fileVO.getFileType());
+        imageVO.setUpdater(fileVO.getCreator());
         return imageVO;
     }
 
