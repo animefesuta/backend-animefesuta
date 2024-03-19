@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import cn.baizhi958216.core.ResponseResultBody;
+import cn.baizhi958216.service.CosService;
 import cn.baizhi958216.service.ImageService;
 import cn.baizhi958216.viewobject.ImageVO;
 import cn.baizhi958216.viewobject.PicVO;
@@ -27,29 +28,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 @CrossOrigin
 @RestController
 @ResponseResultBody
-@RequestMapping("/api/v1/fesuta/image")
-public class ImageController {
-    private final ImageService imageService;
+@RequestMapping("/api/v1/fesuta/cos")
+public class PostPicController {
+    private final CosService cosService;
 
-    public ImageController(ImageService imageService) {
-        this.imageService = imageService;
-    }
-
-    @PostMapping("/imageupload")
-    public ImageVO[] imageUpload(@RequestParam("file[]") MultipartFile[] files) {
-        return Arrays.stream(files)
-                .map(imageService::uploadImage)
-                .toArray(ImageVO[]::new);
-    }
-
-    @PostMapping("/imageuploadsingle")
-    public ImageVO imageUploadSingle(@RequestParam("file") MultipartFile file) {
-        return imageService.uploadImage(file);
+    public PostPicController(CosService cosService) {
+        this.cosService = cosService;
     }
 
     @PostMapping("/postpic")
     public PicVO postPic(@RequestBody PicVO picVO) {
-        return new PicVO();
+        return cosService.postPic(picVO);
     }
 
 }

@@ -82,7 +82,7 @@ public class FileServiceImpl implements FileService {
 
             try (InputStream inputStream = file.getInputStream()) {
                 String fileHash = fileMd5HashUtils.getFileHash256(inputStream);
-                String userEmail = BaseUserInfo.get("username");
+                String userEmail = BaseUserInfo.get("useremail");
                 s.setId(uuid);
                 s.setCreator(userEmail);
                 s.setOriginalFileName(file.getOriginalFilename());
