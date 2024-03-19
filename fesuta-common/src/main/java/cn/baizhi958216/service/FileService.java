@@ -7,7 +7,6 @@ import cn.baizhi958216.dataobject.FileDO;
 import cn.baizhi958216.viewobject.FileVO;
 
 public interface FileService {
-    public void init();
 
     <S extends FileDO, T extends FileVO> T store(S s, T t, MultipartFile file, JpaRepository<S, Object> jpaRepository);
 }

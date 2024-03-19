@@ -43,5 +43,4 @@ public interface ImageService {
      */
     ArrayList<ImageVO> findImagesByImageCategory(String imageCategory);
 
-    public void init();
 }

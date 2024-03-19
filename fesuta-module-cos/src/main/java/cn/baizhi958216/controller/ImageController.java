@@ -34,7 +34,7 @@ public class ImageController {
     }
 
     @PostMapping("/imageupload")
-    public ImageVO[] imageUpload(@RequestParam("files") MultipartFile[] files) {
+    public ImageVO[] imageUpload(@RequestParam("file[]") MultipartFile[] files) {
         return Arrays.stream(files)
                 .map(imageService::uploadImage)
                 .toArray(ImageVO[]::new);

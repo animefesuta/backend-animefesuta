@@ -1,17 +1,11 @@
 package cn.baizhi958216.service.impl;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import cn.baizhi958216.core.StorageProperties;
 import cn.baizhi958216.dataobject.ImageDO;
-import cn.baizhi958216.exception.StorageException;
 import cn.baizhi958216.repository.ImageRepository;
 import cn.baizhi958216.service.FileService;
 import cn.baizhi958216.service.ImageService;
@@ -21,17 +15,11 @@ import cn.baizhi958216.viewobject.ImageVO;
 @Service
 public class ImageServiceImpl implements ImageService {
 
-    private Path rootLocation;
+    private final FileService fileService;
     private final ImageRepository imageRepository;
-    private final FileService fileService = new FileServiceImpl(new StorageProperties(),
-            "fesuta-web/src/main/resources/public/images");
 
-    public ImageServiceImpl(StorageProperties properties, ImageRepository imageRepository) {
-        properties.setLocation("fesuta-web/src/main/resources/public/images");
-        if (properties.getLocation().trim().length() == 0) {
-            throw new StorageException("文件上传路径不可为空！");
-        }
-        this.rootLocation = Paths.get(properties.getLocation());
+    ImageServiceImpl(FileService fileService, ImageRepository imageRepository) {
+        this.fileService = fileService;
         this.imageRepository = imageRepository;
     }
 
@@ -98,14 +86,5 @@ public class ImageServiceImpl implements ImageService {
     public ArrayList<ImageVO> findImagesByImageCategory(String imageCategory) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'findImagesByImageCategory'");
-    }
-
-    @Override
-    public void init() {
-        try {
-            Files.createDirectories(rootLocation);
-        } catch (IOException e) {
-            throw new StorageException("初始化存储路径失败！", e);
-        }
     }
 }
