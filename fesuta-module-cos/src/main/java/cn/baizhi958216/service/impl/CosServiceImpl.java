@@ -22,7 +22,7 @@ public class CosServiceImpl implements CosService {
 
     @Override
     public PicVO postPic(PicVO picVO) {
-        String useremail = BaseUserInfo.get("useremail");
+        String useremail = BaseUserInfo.get("username");
         PicDO picDO = new PicDO();
         picDO.setId(UUID.randomUUID().toString());
         picDO.setImage(picVO.getImage());

@@ -80,7 +80,7 @@ public class UserServiceImpl implements UserService {
         if (uuid == null) {
             return null;
         }
-        String useremail = BaseUserInfo.get("useremail");
+        String useremail = BaseUserInfo.get("username");
         return userRepository.findById(uuid)
                 .map(userDO -> {
                     if (userVO.getNickname() != null) {
