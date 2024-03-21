@@ -17,6 +17,8 @@ public interface UserService {
 
     Boolean deleteUserByUUID(String uuid);
 
+    UserVO updateUserAvatar(String link);
+
     UserVO updateUserByUUID(UserVO userVO);
 
     UserVO findUserByEmail(String useremail);

@@ -37,6 +37,7 @@ public class UserServiceImpl implements UserService {
         userDO.setCreator(userVO.getEmail());
         userDO.setCreateTime(LocalDateTime.now());
         userDO.setUpdateTime(LocalDateTime.now());
+        userDO.setInstruction("这个人很懒，什么都没有留下");
         userDO = userRepository.save(userDO);
         return convertToVO(userDO);
     }
@@ -98,6 +99,9 @@ public class UserServiceImpl implements UserService {
                     if (userVO.getEmail() != null) {
                         userDO.setEmail(userVO.getEmail());
                     }
+                    if (userVO.getInstruction() != null) {
+                        userDO.setInstruction(userVO.getInstruction());
+                    }
                     userDO.setUpdateTime(LocalDateTime.now());
                     userDO.setUpdater(useremail);
                     return convertToVO(userRepository.save(userDO));
@@ -110,13 +114,27 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByEmail(useremail).map(this::convertToVO).orElse(null);
     }
 
+    @Override
+    public UserVO updateUserAvatar(String link) {
+        String userEmail = BaseUserInfo.get("username");
+        UserDO userDO = userRepository.findByEmail(userEmail).orElse(null);
+        if (userDO != null) {
+            userDO.setAvatar(link);
+            userDO.setUpdateTime(LocalDateTime.now());
+            return convertToVO(userRepository.save(userDO));
+        }
+        return null;
+    }
+
     private UserVO convertToVO(UserDO userDO) {
         UserVO userVO = new UserVO();
         userVO.setId(userDO.getId());
+        userVO.setAvatar(userDO.getAvatar());
         userVO.setNickname(userDO.getNickname());
         userVO.setType(userDO.getType());
         userVO.setCreator(userDO.getCreator());
         userVO.setEmail(userDO.getEmail());
+        userVO.setInstruction(userDO.getInstruction());
         userVO.setCreateTime(userDO.getCreateTime());
         userVO.setUpdateTime(userDO.getUpdateTime());
         userVO.setUpdater(userDO.getUpdater());

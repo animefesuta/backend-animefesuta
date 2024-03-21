@@ -28,9 +28,9 @@ public class UserVO extends BaseVO {
      */
     private String avatar;
     /**
-     * 用户数据
+     * 用户个性签名
      */
-    private String rawUserInfo;
+    private String instruction;
     /**
      * 用户密码
      */

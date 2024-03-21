@@ -7,9 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @CrossOrigin
 @RestController
@@ -61,6 +58,11 @@ public class UserController {
     @PostMapping("/fesuta/user/updateUserByUUID")
     public UserVO updateUserByUUID(@RequestBody UserVO userVO) {
         return userService.updateUserByUUID(userVO);
+    }
+
+    @PostMapping("/fesuta/user/updateAvatar")
+    public UserVO updateAvatar(@RequestBody UserVO userVO) {
+        return userService.updateUserAvatar(userVO.getAvatar());
     }
 
 }
