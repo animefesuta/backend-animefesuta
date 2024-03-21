@@ -54,7 +54,8 @@ public class JwtService {
                 .claims(extraClaims)
                 .subject(userDetails.getUsername())
                 .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + expiration))
+                // 配置了token是1个小时过期，7天需要乘以24*7
+                .expiration(new Date(System.currentTimeMillis() + 24 * 7 * expiration))
                 .signWith(getSignInKey(), Jwts.SIG.HS256)
                 .compact();
     }
