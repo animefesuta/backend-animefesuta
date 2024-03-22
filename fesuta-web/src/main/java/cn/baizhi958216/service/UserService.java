@@ -24,4 +24,6 @@ public interface UserService {
     UserVO findUserByEmail(String useremail);
 
     UserVO updateUserInstruction(String instruction);
+
+    UserVO updateUserNickName(String nickname);
 }
