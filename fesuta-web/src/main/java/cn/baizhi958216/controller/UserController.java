@@ -65,4 +65,9 @@ public class UserController {
         return userService.updateUserAvatar(userVO.getAvatar());
     }
 
+    @PostMapping("/fesuta/user/updateInstruction")
+    public UserVO updateInstruction(@RequestBody UserVO userVO) {
+        return userService.updateUserInstruction(userVO.getInstruction());
+    }
+
 }

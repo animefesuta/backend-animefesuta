@@ -126,6 +126,18 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
+    @Override
+    public UserVO updateUserInstruction(String instruction) {
+        String userEmail = BaseUserInfo.get("username");
+        UserDO userDO = userRepository.findByEmail(userEmail).orElse(null);
+        if (userDO != null) {
+            userDO.setInstruction(instruction);
+            userDO.setUpdateTime(LocalDateTime.now());
+            return convertToVO(userRepository.save(userDO));
+        }
+        return null;
+    }
+
     private UserVO convertToVO(UserDO userDO) {
         UserVO userVO = new UserVO();
         userVO.setId(userDO.getId());

@@ -22,4 +22,6 @@ public interface UserService {
     UserVO updateUserByUUID(UserVO userVO);
 
     UserVO findUserByEmail(String useremail);
+
+    UserVO updateUserInstruction(String instruction);
 }
