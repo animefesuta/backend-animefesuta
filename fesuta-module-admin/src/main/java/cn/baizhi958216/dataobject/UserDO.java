@@ -49,6 +49,10 @@ public class UserDO extends BaseDO implements UserDetails {
      */
     @NonNull
     private String password;
+    /**
+     * 用户个人中心背景
+     */
+    private String backgroundImage;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

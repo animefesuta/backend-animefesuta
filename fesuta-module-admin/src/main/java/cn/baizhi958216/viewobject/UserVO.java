@@ -35,4 +35,8 @@ public class UserVO extends BaseVO {
      * 用户密码
      */
     private String password;
+    /**
+     * 用户个人中心背景
+     */
+    private String BackgroundImage;
 }

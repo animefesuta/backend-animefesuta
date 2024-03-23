@@ -75,4 +75,9 @@ public class UserController {
         return userService.updateUserNickName(userVO.getNickname());
     }
 
+    @PostMapping("/fesuta/user/updateBackground")
+    public UserVO updateUserBackground(@RequestBody UserVO userVO) {
+        return userService.updateUserBackground(userVO.getBackgroundImage());
+    }
+
 }

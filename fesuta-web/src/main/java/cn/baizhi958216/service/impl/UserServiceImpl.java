@@ -102,6 +102,9 @@ public class UserServiceImpl implements UserService {
                     if (userVO.getInstruction() != null) {
                         userDO.setInstruction(userVO.getInstruction());
                     }
+                    if (userVO.getBackgroundImage() != null) {
+                        userDO.setBackgroundImage(userVO.getBackgroundImage());
+                    }
                     userDO.setUpdateTime(LocalDateTime.now());
                     userDO.setUpdater(useremail);
                     return convertToVO(userRepository.save(userDO));
@@ -150,6 +153,18 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
+    @Override
+    public UserVO updateUserBackground(String background) {
+        String userEmail = BaseUserInfo.get("username");
+        UserDO userDO = userRepository.findByEmail(userEmail).orElse(null);
+        if (userDO != null) {
+            userDO.setBackgroundImage(background);
+            userDO.setUpdateTime(LocalDateTime.now());
+            return convertToVO(userRepository.save(userDO));
+        }
+        return null;
+    }
+
     private UserVO convertToVO(UserDO userDO) {
         UserVO userVO = new UserVO();
         userVO.setId(userDO.getId());
@@ -163,6 +178,7 @@ public class UserServiceImpl implements UserService {
         userVO.setUpdateTime(userDO.getUpdateTime());
         userVO.setUpdater(userDO.getUpdater());
         userVO.setDeleted(userDO.getDeleted());
+        userVO.setBackgroundImage(userDO.getBackgroundImage());
         return userVO;
     }
 }

@@ -26,4 +26,6 @@ public interface UserService {
     UserVO updateUserInstruction(String instruction);
 
     UserVO updateUserNickName(String nickname);
+
+    UserVO updateUserBackground(String background);
 }
