@@ -28,4 +28,6 @@ public interface UserService {
     UserVO updateUserNickName(String nickname);
 
     UserVO updateUserBackground(String background);
+
+    UserVO updateUserEmail(String email);
 }

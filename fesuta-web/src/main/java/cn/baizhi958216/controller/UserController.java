@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @CrossOrigin
 @RestController
@@ -78,6 +80,11 @@ public class UserController {
     @PostMapping("/fesuta/user/updateBackground")
     public UserVO updateUserBackground(@RequestBody UserVO userVO) {
         return userService.updateUserBackground(userVO.getBackgroundImage());
+    }
+
+    @PostMapping("/fesuta/user/updateEmail")
+    public UserVO updateEmail(@RequestBody UserVO userVO) {
+        return userService.updateUserEmail(userVO.getEmail());
     }
 
 }
