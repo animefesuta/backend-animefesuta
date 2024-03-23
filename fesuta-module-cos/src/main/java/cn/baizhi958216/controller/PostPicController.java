@@ -10,6 +10,8 @@ import cn.baizhi958216.service.CosService;
 import cn.baizhi958216.service.ImageService;
 import cn.baizhi958216.viewobject.ImageVO;
 import cn.baizhi958216.viewobject.PicVO;
+import cn.baizhi958216.viewobject.UserVO;
+import cn.baizhi958216.viewobject.UserWithPostVO;
 
 import java.util.Arrays;
 
@@ -45,6 +47,11 @@ public class PostPicController {
     @GetMapping("/getPostByUID")
     public PicVO[] getPostByUID(@RequestParam String UID) {
         return cosService.getPostsByUID(UID);
+    }
+
+    @GetMapping("/getAllAuthors")
+    public UserWithPostVO[] getAllAuthors() {
+        return cosService.getAllAuthors();
     }
 
 }

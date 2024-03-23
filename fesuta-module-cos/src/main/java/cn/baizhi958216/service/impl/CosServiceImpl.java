@@ -1,6 +1,8 @@
 package cn.baizhi958216.service.impl;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.stereotype.Service;
@@ -12,6 +14,7 @@ import cn.baizhi958216.repository.UserRepository;
 import cn.baizhi958216.service.CosService;
 import cn.baizhi958216.utils.BaseUserInfo;
 import cn.baizhi958216.viewobject.PicVO;
+import cn.baizhi958216.viewobject.UserWithPostVO;
 
 @Service
 public class CosServiceImpl implements CosService {
@@ -48,6 +51,24 @@ public class CosServiceImpl implements CosService {
     @Override
     public PicVO[] getPostsByUID(String UID) {
         return picRepository.findAllByCreator(UID).stream().map(this::coverToVO).toArray(PicVO[]::new);
+    }
+
+    @Override
+    public UserWithPostVO[] getAllAuthors() {
+        return picRepository.findAll()
+                .stream()
+                .map(p -> {
+                    UserWithPostVO userWithPostVO = new UserWithPostVO();
+                    userWithPostVO.setUid(p.getCreator());
+                    UserDO user = userRepository.findByUid(p.getCreator()).orElse(null);
+                    if (user != null) {
+                        userWithPostVO.setUsername(user.getNickname());
+                        userWithPostVO.setAvatar(user.getAvatar());
+                    }
+                    return userWithPostVO;
+                })
+                .distinct()
+                .toArray(UserWithPostVO[]::new);
     }
 
     private PicVO coverToVO(PicDO picDO) {
