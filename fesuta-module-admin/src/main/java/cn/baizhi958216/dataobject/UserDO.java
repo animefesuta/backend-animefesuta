@@ -22,6 +22,11 @@ public class UserDO extends BaseDO implements UserDetails {
     @Builder.Default
     @Id
     private String id = UUID.randomUUID().toString();
+
+    /**
+     * 用户社区唯一标识
+     */
+    private String uid;
     /**
      * 平台的类型
      * 枚举 {@link UserTypeEnum}

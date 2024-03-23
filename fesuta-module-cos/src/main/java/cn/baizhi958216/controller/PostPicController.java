@@ -16,6 +16,7 @@ import java.util.Arrays;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.GetMapping;
 
 /**
  * 需求：
@@ -39,6 +40,11 @@ public class PostPicController {
     @PostMapping("/postpic")
     public PicVO postPic(@RequestBody PicVO picVO) {
         return cosService.postPic(picVO);
+    }
+
+    @GetMapping("/getPostByUID")
+    public PicVO[] getPostByUID(@RequestParam String UID) {
+        return cosService.getPostsByUID(UID);
     }
 
 }

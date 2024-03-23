@@ -11,6 +11,10 @@ import lombok.Setter;
 public class UserVO extends BaseVO {
     private String id;
     /**
+     * 用户社区唯一标识
+     */
+    private String uid;
+    /**
      * 平台的类型
      * 枚举 {@link UserTypeEnum}
      */

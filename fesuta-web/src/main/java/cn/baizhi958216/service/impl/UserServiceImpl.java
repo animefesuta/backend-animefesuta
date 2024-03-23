@@ -30,6 +30,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserVO createUser(UserVO userVO) {
         UserDO userDO = new UserDO();
+        userDO.setUid(String.format("%06d", userRepository.count() + 1));
         userDO.setNickname(userVO.getNickname());
         userDO.setPassword(userVO.getPassword());
         userDO.setEmail(userVO.getEmail());
@@ -168,6 +169,7 @@ public class UserServiceImpl implements UserService {
     private UserVO convertToVO(UserDO userDO) {
         UserVO userVO = new UserVO();
         userVO.setId(userDO.getId());
+        userVO.setUid(userDO.getUid());
         userVO.setAvatar(userDO.getAvatar());
         userVO.setNickname(userDO.getNickname());
         userVO.setType(userDO.getType());
