@@ -13,4 +13,6 @@ public interface UserRepository extends JpaRepository<UserDO, String> {
     List<UserDO> findAllByNicknameLike(String string);
 
     Optional<UserDO> findByEmail(String email);
+
+    Optional<UserDO> findByUid(String uid);
 }
