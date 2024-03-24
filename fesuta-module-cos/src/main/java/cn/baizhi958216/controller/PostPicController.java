@@ -3,17 +3,11 @@ package cn.baizhi958216.controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
 import cn.baizhi958216.core.ResponseResultBody;
 import cn.baizhi958216.service.CosService;
-import cn.baizhi958216.service.ImageService;
-import cn.baizhi958216.viewobject.ImageVO;
 import cn.baizhi958216.viewobject.PicVO;
-import cn.baizhi958216.viewobject.UserVO;
 import cn.baizhi958216.viewobject.UserWithPostVO;
-
-import java.util.Arrays;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -52,6 +46,16 @@ public class PostPicController {
     @GetMapping("/getAllAuthors")
     public UserWithPostVO[] getAllAuthors() {
         return cosService.getAllAuthors();
+    }
+
+    @GetMapping("/getRecommendPosts")
+    public PicVO[] getRecommendPosts() {
+        return cosService.getRecommendPosts();
+    }
+
+    @GetMapping("/getBanner")
+    public PicVO[] getBannerPosts() {
+        return cosService.getBannerPosts();
     }
 
 }

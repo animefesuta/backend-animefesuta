@@ -38,5 +38,11 @@ public class PicDO extends BaseDO {
     private Boolean status;
     // 状态描述
     @Column(name = "post_pic_status_desc")
-    private Boolean status_desc;
+    private String status_desc;
+    // 是否推荐
+    @Column(name = "post_pic_recommend")
+    private Boolean recommend;
+    // 是否横幅
+    @Column(name = "post_pic_banner")
+    private Boolean banner;
 }

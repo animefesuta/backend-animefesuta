@@ -16,5 +16,7 @@ public class PicVO extends BaseVO {
     private ArrayList<String> coser;
     private String authorUID;
     private Boolean status;
-    private Boolean status_desc;
+    private String status_desc;
+    private Boolean recommend;
+    private Boolean banner;
 }

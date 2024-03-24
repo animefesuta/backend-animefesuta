@@ -9,4 +9,8 @@ public interface CosService {
     PicVO[] getPostsByUID(String UID);
 
     UserWithPostVO[] getAllAuthors();
+
+    PicVO[] getRecommendPosts();
+
+    PicVO[] getBannerPosts();
 }

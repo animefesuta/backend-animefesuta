@@ -44,6 +44,8 @@ public class CosServiceImpl implements CosService {
         picDO.setCreator(user.getUid());
         picDO.setCreateTime(LocalDateTime.now());
         picDO.setUpdateTime(LocalDateTime.now());
+        picDO.setBanner(true);
+        picDO.setRecommend(true);
         picRepository.save(picDO);
         return coverToVO(picDO);
     }
@@ -71,6 +73,22 @@ public class CosServiceImpl implements CosService {
                 .toArray(UserWithPostVO[]::new);
     }
 
+    @Override
+    public PicVO[] getRecommendPosts() {
+        return picRepository.findAll()
+                .stream().filter(p -> p.getRecommend() == true)
+                .map(this::coverToVO)
+                .toArray(PicVO[]::new);
+    }
+
+    @Override
+    public PicVO[] getBannerPosts() {
+        return picRepository.findAll()
+                .stream().filter(p -> p.getBanner() == true)
+                .map(this::coverToVO)
+                .toArray(PicVO[]::new);
+    }
+
     private PicVO coverToVO(PicDO picDO) {
         PicVO picVO = new PicVO();
         picVO.setId(picDO.getId());
@@ -82,6 +100,8 @@ public class CosServiceImpl implements CosService {
         picVO.setCreator(picDO.getCreator());
         picVO.setCreateTime(picDO.getCreateTime());
         picVO.setUpdateTime(picDO.getUpdateTime());
+        picVO.setAuthorUID(picDO.getCreator());
+        picVO.setRecommend(picDO.getRecommend());
         return picVO;
     }
 
