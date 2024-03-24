@@ -16,4 +16,5 @@ public class ForumPostVO extends BaseVO {
     private Boolean status;
     private String status_desc;
     private Boolean recommend;
+    private String nickname;
 }

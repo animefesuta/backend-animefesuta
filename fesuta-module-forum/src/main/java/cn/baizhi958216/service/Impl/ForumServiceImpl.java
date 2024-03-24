@@ -52,7 +52,9 @@ public class ForumServiceImpl implements ForumService {
         ForumPostDO forumPostDO[] = forumRepository.findAllByTheme(theme);
         ForumPostVO forumPostVO[] = new ForumPostVO[forumPostDO.length];
         for (int i = 0; i < forumPostDO.length; i++) {
+            UserDO userDO = userRepository.findByUid(forumPostDO[i].getCreator()).orElse(null);
             forumPostVO[i] = convertToPostVO(forumPostDO[i]);
+            forumPostVO[i].setNickname(userDO.getNickname());
         }
         return forumPostVO;
     }
@@ -62,7 +64,9 @@ public class ForumServiceImpl implements ForumService {
         ForumPostDO forumPostDO[] = forumRepository.findAllByRecommend(true);
         ForumPostVO forumPostVO[] = new ForumPostVO[forumPostDO.length];
         for (int i = 0; i < forumPostDO.length; i++) {
+            UserDO userDO = userRepository.findByUid(forumPostDO[i].getCreator()).orElse(null);
             forumPostVO[i] = convertToPostVO(forumPostDO[i]);
+            forumPostVO[i].setNickname(userDO.getNickname());
         }
         return forumPostVO;
     }
