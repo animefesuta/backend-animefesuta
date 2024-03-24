@@ -33,4 +33,10 @@ public class PicDO extends BaseDO {
     private ArrayList<String> tags;
     @Column(name = "post_pic_coser")
     private ArrayList<String> coser;
+    // 图片状态
+    @Column(name = "post_pic_status")
+    private Boolean status;
+    // 状态描述
+    @Column(name = "post_pic_status_desc")
+    private Boolean status_desc;
 }

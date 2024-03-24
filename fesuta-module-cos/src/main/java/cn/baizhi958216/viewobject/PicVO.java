@@ -14,4 +14,7 @@ public class PicVO extends BaseVO {
     private String theme;
     private ArrayList<String> tags;
     private ArrayList<String> coser;
+    private String authorUID;
+    private Boolean status;
+    private Boolean status_desc;
 }
