@@ -37,8 +37,34 @@ public class ForumServiceImpl implements ForumService {
         forumPostDO.setTheme(forumPostVO.getTheme());
         forumPostDO.setContent(forumPostVO.getContent());
         forumPostDO.setCreateTime(LocalDateTime.now());
+        forumPostDO.setShareCount(0);
+        forumPostDO.setClickCount(0);
+        forumPostDO.setLikeCount(0);
+        forumPostDO.setStatus(false);
+        forumPostDO.setStatus_desc("");
+        forumPostDO.setRecommend(false);
         forumRepository.save(forumPostDO);
         return convertToPostVO(forumPostDO);
+    }
+
+    @Override
+    public ForumPostVO[] getPostsByTheme(String theme) {
+        ForumPostDO forumPostDO[] = forumRepository.findAllByTheme(theme);
+        ForumPostVO forumPostVO[] = new ForumPostVO[forumPostDO.length];
+        for (int i = 0; i < forumPostDO.length; i++) {
+            forumPostVO[i] = convertToPostVO(forumPostDO[i]);
+        }
+        return forumPostVO;
+    }
+
+    @Override
+    public ForumPostVO[] getPostsRecommend() {
+        ForumPostDO forumPostDO[] = forumRepository.findAllByRecommend(true);
+        ForumPostVO forumPostVO[] = new ForumPostVO[forumPostDO.length];
+        for (int i = 0; i < forumPostDO.length; i++) {
+            forumPostVO[i] = convertToPostVO(forumPostDO[i]);
+        }
+        return forumPostVO;
     }
 
     private ForumPostVO convertToPostVO(ForumPostDO forumPostDO) {
@@ -49,6 +75,9 @@ public class ForumServiceImpl implements ForumService {
         forumPostVO.setTheme(forumPostDO.getTheme());
         forumPostVO.setContent(forumPostDO.getContent());
         forumPostVO.setCreateTime(forumPostDO.getCreateTime());
+        forumPostVO.setLikeCount(forumPostDO.getLikeCount());
+        forumPostVO.setShareCount(forumPostDO.getShareCount());
+        forumPostVO.setClickCount(forumPostDO.getClickCount());
         return forumPostVO;
     }
 }

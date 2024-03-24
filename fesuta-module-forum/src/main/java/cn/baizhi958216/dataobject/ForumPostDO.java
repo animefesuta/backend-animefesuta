@@ -10,7 +10,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "fesuta_cos_post_forum")
+@Table(name = "fesuta_forum_post")
 @Data
 @EqualsAndHashCode(callSuper = false)
 @AllArgsConstructor
@@ -27,4 +27,19 @@ public class ForumPostDO extends BaseDO {
     private String theme;
     @Column(name = "post_forum_content")
     private String content;
+    @Column(name = "post_forum_clickcount")
+    private Integer clickCount;
+    @Column(name = "post_forum_likecount")
+    private Integer likeCount;
+    @Column(name = "post_forum_sharecount")
+    private Integer shareCount;
+    // 帖子状态
+    @Column(name = "post_forum_status")
+    private Boolean status;
+    // 状态描述
+    @Column(name = "post_forum_status_desc")
+    private String status_desc;
+    // 是否推荐
+    @Column(name = "post_forum_recommend")
+    private Boolean recommend;
 }

@@ -10,6 +10,8 @@ import cn.baizhi958216.viewobject.ForumPostVO;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @CrossOrigin
 @RestController
@@ -25,6 +27,16 @@ public class ForumController {
     @PostMapping("/createpost")
     public ForumPostVO createPost(@RequestBody ForumPostVO forumPostVO) {
         return forumService.createPost(forumPostVO);
+    }
+
+    @GetMapping("/getPostsByTheme")
+    public ForumPostVO[] getPostsByTheme(@RequestParam String theme) {
+        return forumService.getPostsByTheme(theme);
+    }
+
+    @GetMapping("/getPostsRecommend")
+    public ForumPostVO[] getPostsRecommend() {
+        return forumService.getPostsRecommend();
     }
 
 }
