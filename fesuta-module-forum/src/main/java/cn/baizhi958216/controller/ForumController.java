@@ -31,12 +31,9 @@ public class ForumController {
 
     @GetMapping("/getPostsByTheme")
     public ForumPostVO[] getPostsByTheme(@RequestParam String theme) {
+        if (theme.equals("0")) {
+            return forumService.getPostsRecommend();
+        }
         return forumService.getPostsByTheme(theme);
     }
-
-    @GetMapping("/getPostsRecommend")
-    public ForumPostVO[] getPostsRecommend() {
-        return forumService.getPostsRecommend();
-    }
-
 }
