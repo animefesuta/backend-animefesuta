@@ -25,7 +25,7 @@ public class ForumPostDO extends BaseDO {
     private String title;
     @Column(name = "post_forum_theme")
     private String theme;
-    @Column(name = "post_forum_content")
+    @Column(name = "post_forum_content", columnDefinition = "TEXT")
     private String content;
     @Column(name = "post_forum_clickcount")
     private Integer clickCount;
@@ -42,4 +42,7 @@ public class ForumPostDO extends BaseDO {
     // 是否推荐
     @Column(name = "post_forum_recommend")
     private Boolean recommend;
+    // 帖子首页图
+    @Column(name = "post_forum_img")
+    private String img;
 }

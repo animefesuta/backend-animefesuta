@@ -43,6 +43,7 @@ public class ForumServiceImpl implements ForumService {
         forumPostDO.setStatus(false);
         forumPostDO.setStatus_desc("");
         forumPostDO.setRecommend(false);
+        forumPostDO.setImg(forumPostVO.getImg());
         forumRepository.save(forumPostDO);
         return convertToPostVO(forumPostDO);
     }
@@ -82,6 +83,7 @@ public class ForumServiceImpl implements ForumService {
         forumPostVO.setLikeCount(forumPostDO.getLikeCount());
         forumPostVO.setShareCount(forumPostDO.getShareCount());
         forumPostVO.setClickCount(forumPostDO.getClickCount());
+        forumPostVO.setImg(forumPostDO.getImg());
         return forumPostVO;
     }
 }
