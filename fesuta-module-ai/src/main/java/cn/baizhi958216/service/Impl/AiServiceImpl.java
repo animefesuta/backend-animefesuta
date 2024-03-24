@@ -50,7 +50,7 @@ public class AiServiceImpl implements AiService {
 
     @Override
     public AiPostVO[] getAiPosts() {
-        return aiPostRepository.findAll()
+        return aiPostRepository.getAiPostsRandom(6)
                 .stream()
                 .map(this::coverToVO)
                 .toArray(AiPostVO[]::new);
