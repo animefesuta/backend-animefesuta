@@ -12,6 +12,7 @@ import cn.baizhi958216.repository.UserRepository;
 import cn.baizhi958216.service.ForumService;
 import cn.baizhi958216.utils.BaseUserInfo;
 import cn.baizhi958216.viewobject.ForumPostVO;
+import cn.baizhi958216.viewobject.ForumRankVO;
 
 @Service
 public class ForumServiceImpl implements ForumService {
@@ -70,6 +71,18 @@ public class ForumServiceImpl implements ForumService {
             forumPostVO[i].setNickname(userDO.getNickname());
         }
         return forumPostVO;
+    }
+
+    @Override
+    public ForumRankVO[] getRanking() {
+        ForumPostDO forumPostDO[] = forumRepository.findAllByClickCount(10);
+        ForumRankVO forumRankVO[] = new ForumRankVO[forumPostDO.length];
+        for (int i = 0; i < forumPostDO.length; i++) {
+            forumRankVO[i] = new ForumRankVO();
+            forumRankVO[i].setId(forumPostDO[i].getId());
+            forumRankVO[i].setTitle(forumPostDO[i].getTitle());
+        }
+        return forumRankVO;
     }
 
     private ForumPostVO convertToPostVO(ForumPostDO forumPostDO) {

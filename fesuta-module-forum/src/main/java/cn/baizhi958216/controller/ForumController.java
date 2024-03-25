@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 import cn.baizhi958216.core.ResponseResultBody;
 import cn.baizhi958216.service.ForumService;
 import cn.baizhi958216.viewobject.ForumPostVO;
+import cn.baizhi958216.viewobject.ForumRankVO;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,4 +37,10 @@ public class ForumController {
         }
         return forumService.getPostsByTheme(theme);
     }
+
+    @GetMapping("/getRanking")
+    public ForumRankVO[] getRanking() {
+        return forumService.getRanking();
+    }
+
 }
