@@ -6,9 +6,11 @@ import cn.baizhi958216.viewobject.LiveVO;
 public interface LiveService {
     LiveVO createLive(LiveDO liveDO);
 
-    LiveVO getLatestStream();
+    LiveVO getLiveRoom();
 
     LiveVO updateLive(LiveVO liveVO);
 
     Boolean closeLive();
+
+    String getLatestRoom();
 }

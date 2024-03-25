@@ -30,9 +30,9 @@ public class LiveController {
         return liveService.createLive(liveDO);
     }
 
-    @GetMapping("/getLatestStream")
-    public LiveVO getLatestStream() {
-        return liveService.getLatestStream();
+    @GetMapping("/getLiveRoom")
+    public LiveVO getLiveRoom() {
+        return liveService.getLiveRoom();
     }
 
     // 没有新建直播间，使用VO
@@ -44,6 +44,11 @@ public class LiveController {
     @GetMapping("/closeStream")
     public Boolean closeStream() {
         return liveService.closeLive();
+    }
+
+    @GetMapping("/latestRoom")
+    public String getLatestRoom() {
+        return this.liveService.getLatestRoom();
     }
 
 }

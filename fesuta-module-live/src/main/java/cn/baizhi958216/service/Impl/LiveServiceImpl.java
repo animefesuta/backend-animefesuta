@@ -49,7 +49,7 @@ public class LiveServiceImpl implements LiveService {
     }
 
     @Override
-    public LiveVO getLatestStream() {
+    public LiveVO getLiveRoom() {
         String useremail = BaseUserInfo.get("username");
         UserDO user = userRepository.findByEmail(useremail).orElse(null);
         if (user == null) {
@@ -106,5 +106,14 @@ public class LiveServiceImpl implements LiveService {
         liveDO.setUpdateTime(LocalDateTime.now());
         this.liveRepository.save(liveDO);
         return true;
+    }
+
+    @Override
+    public String getLatestRoom() {
+        LiveDO liveDO = this.liveRepository.findLatestRoom();
+        if (liveDO == null) {
+            return null;
+        }
+        return liveDO.getRoomId();
     }
 }
