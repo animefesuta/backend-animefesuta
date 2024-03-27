@@ -13,4 +13,6 @@ public interface LiveService {
     Boolean closeLive();
 
     String getLatestRoom();
+
+    String getRoomStream(String uid);
 }

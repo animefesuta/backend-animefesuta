@@ -34,3 +34,6 @@ build/
 
 ### file upload ###
 upload-dir
+
+### .VSCodeCounter
+.VSCodeCounter/

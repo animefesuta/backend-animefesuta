@@ -116,4 +116,13 @@ public class LiveServiceImpl implements LiveService {
         }
         return liveDO.getRoomId();
     }
+
+    @Override
+    public String getRoomStream(String uid) {
+        LiveDO liveDO = this.liveRepository.findByCreatorAndDeleteIsFalse(uid);
+        if (liveDO == null) {
+            return "";
+        }
+        return liveDO.getRoomId();
+    }
 }

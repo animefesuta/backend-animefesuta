@@ -12,6 +12,7 @@ import cn.baizhi958216.viewobject.LiveVO;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @CrossOrigin
@@ -49,6 +50,11 @@ public class LiveController {
     @GetMapping("/latestRoom")
     public String getLatestRoom() {
         return this.liveService.getLatestRoom();
+    }
+
+    @GetMapping("/getRoomStream/{uid}")
+    public String getMethodName(@PathVariable("uid") String uid) {
+        return this.liveService.getRoomStream(uid);
     }
 
 }
