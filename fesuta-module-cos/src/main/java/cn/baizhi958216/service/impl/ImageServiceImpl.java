@@ -42,49 +42,41 @@ public class ImageServiceImpl implements ImageService {
 
     @Override
     public Boolean deleteImage(String imageId) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'deleteImage'");
     }
 
     @Override
     public ImageVO getImage(String imageId) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getImage'");
     }
 
     @Override
     public ImageVO updateImage(String imageId, ImageVO imageVO) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'updateImage'");
     }
 
     @Override
     public ArrayList<ImageVO> findImagesByUploader(String imageUploader) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'findImagesByUploader'");
     }
 
     @Override
     public ArrayList<ImageVO> findAllImages() {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'findAllImages'");
     }
 
     @Override
     public ArrayList<ImageVO> findImagesByTitleFuzzy(String imageTitle) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'findImagesByTitleFuzzy'");
     }
 
     @Override
     public ArrayList<ImageVO> findImagesByImageKeywords(String imageKeywords) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'findImagesByImageKeywords'");
     }
 
     @Override
     public ArrayList<ImageVO> findImagesByImageCategory(String imageCategory) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'findImagesByImageCategory'");
     }
 }
