@@ -5,6 +5,7 @@ import cn.baizhi958216.enums.UserTypeEnum;
 import cn.baizhi958216.repository.UserRepository;
 import cn.baizhi958216.service.UserService;
 import cn.baizhi958216.utils.BaseUserInfo;
+import cn.baizhi958216.viewobject.UserSignVO;
 import cn.baizhi958216.viewobject.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -174,6 +175,18 @@ public class UserServiceImpl implements UserService {
             userDO.setBackgroundImage(background);
             userDO.setUpdateTime(LocalDateTime.now());
             return convertToVO(userRepository.save(userDO));
+        }
+        return null;
+    }
+
+    @Override
+    public UserVO updateUserType(UserTypeEnum userTypeEnum, UserSignVO userSignVO) {
+        String userEmail = BaseUserInfo.get("username");
+        UserDO userDO = userRepository.findByEmail(userEmail).orElse(null);
+        if (userDO != null) {
+            userDO.setType(userTypeEnum.getType());
+            UserVO savedVO = convertToVO(userRepository.save(userDO));
+            return savedVO;
         }
         return null;
     }

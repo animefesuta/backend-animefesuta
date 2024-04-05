@@ -1,5 +1,7 @@
 package cn.baizhi958216.service;
 
+import cn.baizhi958216.enums.UserTypeEnum;
+import cn.baizhi958216.viewobject.UserSignVO;
 import cn.baizhi958216.viewobject.UserVO;
 
 import java.util.List;
@@ -30,4 +32,6 @@ public interface UserService {
     UserVO updateUserBackground(String background);
 
     UserVO updateUserEmail(String email);
+
+    UserVO updateUserType(UserTypeEnum userTypeEnum, UserSignVO userSignVO);
 }

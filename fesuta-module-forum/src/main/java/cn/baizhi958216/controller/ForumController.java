@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import cn.baizhi958216.core.ResponseResultBody;
 import cn.baizhi958216.service.ForumService;
+import cn.baizhi958216.viewobject.CommentVO;
 import cn.baizhi958216.viewobject.ForumPostVO;
 import cn.baizhi958216.viewobject.ForumRankVO;
 
@@ -41,6 +42,21 @@ public class ForumController {
     @GetMapping("/getRanking")
     public ForumRankVO[] getRanking() {
         return forumService.getRanking();
+    }
+
+    @GetMapping("/getPostById")
+    public ForumPostVO getPostById(@RequestParam String id) {
+        return forumService.getPostById(id);
+    }
+
+    @PostMapping("/sendComment")
+    public Boolean sendComment(@RequestBody CommentVO commentVO) {
+        return forumService.sendComment(commentVO);
+    }
+
+    @GetMapping("/getComments")
+    public CommentVO[] getComments(@RequestParam String id) {
+        return forumService.getComments(id);
     }
 
 }

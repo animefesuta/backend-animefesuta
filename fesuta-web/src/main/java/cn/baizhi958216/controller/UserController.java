@@ -1,14 +1,14 @@
 package cn.baizhi958216.controller;
 
 import cn.baizhi958216.core.ResponseResultBody;
+import cn.baizhi958216.enums.UserTypeEnum;
 import cn.baizhi958216.service.UserService;
+import cn.baizhi958216.viewobject.UserSignVO;
 import cn.baizhi958216.viewobject.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @CrossOrigin
 @RestController
@@ -85,6 +85,16 @@ public class UserController {
     @PostMapping("/fesuta/user/updateEmail")
     public UserVO updateEmail(@RequestBody UserVO userVO) {
         return userService.updateUserEmail(userVO.getEmail());
+    }
+
+    @PostMapping("/fesuta/user/signCoser")
+    public UserVO signCoser(@RequestBody UserSignVO userSignVO) {
+        return userService.updateUserType(UserTypeEnum.COSER, userSignVO);
+    }
+
+    @PostMapping("/fesuta/user/signMerchant")
+    public UserVO signMerchant(@RequestBody UserSignVO userSignVO) {
+        return userService.updateUserType(UserTypeEnum.BUSINESS, userSignVO);
     }
 
 }
