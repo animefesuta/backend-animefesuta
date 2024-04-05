@@ -45,4 +45,11 @@ public class PicDO extends BaseDO {
     // 是否横幅
     @Column(name = "post_pic_banner")
     private Boolean banner;
+
+    @Column(name = "post_pic_likecount")
+    private int likeCount;
+    @Column(name = "post_pic_sharecount")
+    private int shareCount;
+    @Column(name = "post_pic_clickcount")
+    private int clickCount;
 }

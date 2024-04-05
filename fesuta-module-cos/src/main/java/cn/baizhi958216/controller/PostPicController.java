@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import cn.baizhi958216.core.ResponseResultBody;
 import cn.baizhi958216.service.CosService;
+import cn.baizhi958216.viewobject.CommentVO;
 import cn.baizhi958216.viewobject.PicVO;
 import cn.baizhi958216.viewobject.UserWithPostVO;
 
@@ -56,6 +57,31 @@ public class PostPicController {
     @GetMapping("/getBanner")
     public PicVO[] getBannerPosts() {
         return cosService.getBannerPosts();
+    }
+
+    @GetMapping("/getCosById")
+    public PicVO getCosById(@RequestParam String id) {
+        return cosService.getPicById(id);
+    }
+
+    @PostMapping("/sendComment")
+    public Boolean sendComment(@RequestBody CommentVO commentVO) {
+        return cosService.sendComment(commentVO);
+    }
+
+    @GetMapping("/getComments")
+    public CommentVO[] getComments(@RequestParam String id) {
+        return cosService.getComments(id);
+    }
+
+    @GetMapping("/likeCount")
+    public Boolean likeCount(@RequestParam String id) {
+        return cosService.likeCount(id);
+    }
+
+    @GetMapping("/shareCount")
+    public Boolean shareCount(@RequestParam String id) {
+        return cosService.shareCount(id);
     }
 
 }

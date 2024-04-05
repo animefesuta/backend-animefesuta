@@ -19,4 +19,8 @@ public class PicVO extends BaseVO {
     private String status_desc;
     private Boolean recommend;
     private Boolean banner;
+    private int likeCount;
+    private int shareCount;
+    private int clickCount;
+    private String nickName;
 }
