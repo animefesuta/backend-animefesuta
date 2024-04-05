@@ -40,6 +40,7 @@ public class LiveServiceImpl implements LiveService {
         liveDO.setOnline(0);
         liveDO.setCreator(user.getUid());
         liveDO.setDeleted(false);
+        liveDO.setIsLiving(true);
         liveDO.setCreateTime(LocalDateTime.now());
         LiveDO savedDO = this.liveRepository.save(liveDO);
         LiveVO liveVO = new LiveVO();
@@ -124,5 +125,20 @@ public class LiveServiceImpl implements LiveService {
             return "";
         }
         return liveDO.getRoomId();
+    }
+
+    @Override
+    public LiveVO[] getAllLivingRoom() {
+        LiveDO[] liveDOs = this.liveRepository.findAllLivingRoom();
+        LiveVO[] liveVOs = new LiveVO[liveDOs.length];
+        for (int i = 0; i < liveDOs.length; i++) {
+            liveVOs[i] = new LiveVO();
+            liveVOs[i].setCover(liveDOs[i].getCover());
+            liveVOs[i].setTitle(liveDOs[i].getTitle());
+            UserDO userDO = userRepository.findByUid(liveDOs[i].getCreator()).orElse(null);
+            liveVOs[i].setCreator(userDO.getNickname());
+            liveVOs[i].setKey(liveDOs[i].getKey());
+        }
+        return liveVOs;
     }
 }

@@ -15,4 +15,7 @@ public interface LiveRepository extends JpaRepository<LiveDO, Object> {
 
     @Query(value = "SELECT * FROM fesuta_live WHERE deleted=FALSE ORDER BY create_time DESC LIMIT 1", nativeQuery = true)
     LiveDO findLatestRoom();
+
+    @Query(value = "SELECT * FROM fesuta_live WHERE deleted=FALSE AND live_is_living=TRUE ORDER BY create_time", nativeQuery = true)
+    LiveDO[] findAllLivingRoom();
 }

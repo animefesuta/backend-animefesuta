@@ -39,4 +39,7 @@ public class LiveDO extends BaseDO {
     // 直播间人数
     @Column(name = "live_online")
     private Integer online;
+    // 正在直播
+    @Column(name = "live_is_living")
+    private Boolean isLiving;
 }

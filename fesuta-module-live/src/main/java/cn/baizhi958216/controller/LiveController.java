@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @CrossOrigin
 @RestController
@@ -52,8 +53,13 @@ public class LiveController {
     }
 
     @GetMapping("/getRoomStream/{uid}")
-    public String getMethodName(@PathVariable("uid") String uid) {
+    public String getRoomStream(@PathVariable("uid") String uid) {
         return this.liveService.getRoomStream(uid);
+    }
+
+    @GetMapping("/getAllLivingRoom")
+    public LiveVO[] getAllLivingRoom() {
+        return this.liveService.getAllLivingRoom();
     }
 
 }

@@ -15,4 +15,6 @@ public interface LiveService {
     String getLatestRoom();
 
     String getRoomStream(String uid);
+
+    LiveVO[] getAllLivingRoom();
 }
