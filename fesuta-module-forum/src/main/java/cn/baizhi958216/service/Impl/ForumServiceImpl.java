@@ -95,10 +95,15 @@ public class ForumServiceImpl implements ForumService {
     @Override
     public ForumPostVO getPostById(String id) {
         ForumPostDO fdo = forumRepository.findById(id).orElse(null);
-        UserDO userDO = userRepository.findByUid(fdo.getCreator()).orElse(null);
-        ForumPostVO fvo = convertToPostVO(fdo);
-        fvo.setNickname(userDO.getNickname());
-        return fvo;
+        if (fdo != null) {
+            fdo.setClickCount(fdo.getClickCount() + 1);
+            fdo = forumRepository.save(fdo);
+            UserDO userDO = userRepository.findByUid(fdo.getCreator()).orElse(null);
+            ForumPostVO fvo = convertToPostVO(fdo);
+            fvo.setNickname(userDO.getNickname());
+            return fvo;
+        }
+        return null;
     }
 
     @Override
@@ -125,9 +130,31 @@ public class ForumServiceImpl implements ForumService {
         CommentDO[] commentsdo = this.commentRepository.findByThemeId(id);
         CommentVO[] commentVO = new CommentVO[commentsdo.length];
         for (int i = 0; i < commentsdo.length; i++) {
-            commentVO[i] = convertToPostVO(commentsdo[i]);
+            commentVO[i] = convertToCommentVO(commentsdo[i]);
         }
         return commentVO;
+    }
+
+    @Override
+    public Boolean likeCount(String id) {
+        ForumPostDO forumPostDO = forumRepository.findById(id).orElse(null);
+        if (forumPostDO != null) {
+            forumPostDO.setLikeCount(forumPostDO.getLikeCount() + 1);
+            forumRepository.save(forumPostDO);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public Boolean shareCount(String id) {
+        ForumPostDO forumPostDO = forumRepository.findById(id).orElse(null);
+        if (forumPostDO != null) {
+            forumPostDO.setShareCount(forumPostDO.getShareCount() + 1);
+            forumRepository.save(forumPostDO);
+            return true;
+        }
+        return false;
     }
 
     private ForumPostVO convertToPostVO(ForumPostDO forumPostDO) {
@@ -145,7 +172,7 @@ public class ForumServiceImpl implements ForumService {
         return forumPostVO;
     }
 
-    private CommentVO convertToPostVO(CommentDO commentDO) {
+    private CommentVO convertToCommentVO(CommentDO commentDO) {
         CommentVO commentVO = new CommentVO();
         commentVO.setCommentContext(commentDO.getCommentContext());
         commentVO.setCommentLike(commentDO.getCommentLike());

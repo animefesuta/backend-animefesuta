@@ -18,4 +18,8 @@ public interface ForumService {
     Boolean sendComment(CommentVO commentVO);
 
     CommentVO[] getComments(String id);
+
+    Boolean likeCount(String id);
+
+    Boolean shareCount(String id);
 }

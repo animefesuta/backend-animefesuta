@@ -59,4 +59,14 @@ public class ForumController {
         return forumService.getComments(id);
     }
 
+    @GetMapping("/likeCount")
+    public Boolean likeCount(@RequestParam String id) {
+        return forumService.likeCount(id);
+    }
+
+    @GetMapping("/shareCount")
+    public Boolean shareCount(@RequestParam String id) {
+        return forumService.shareCount(id);
+    }
+
 }
