@@ -13,6 +13,7 @@ import cn.baizhi958216.viewobject.PicVO;
 import java.util.Arrays;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 

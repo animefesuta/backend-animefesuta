@@ -3,6 +3,8 @@ package cn.baizhi958216.service.impl;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import cn.baizhi958216.dataobject.CommentDO;
@@ -53,13 +55,17 @@ public class CosServiceImpl implements CosService {
         picDO.setClickCount(0);
         picDO.setLikeCount(0);
         picDO.setShareCount(0);
+        picDO.setDeleted(false);
+        picDO.setStatus(false);
+        picDO.setStatus_desc("审核中");
         picRepository.save(picDO);
         return coverToVO(picDO);
     }
 
     @Override
     public PicVO[] getPostsByUID(String UID) {
-        return picRepository.findAllByCreator(UID).stream().map(this::coverToVO).toArray(PicVO[]::new);
+        return picRepository.findAllByCreator(UID).stream().filter(p -> p.getDeleted().equals(false))
+                .map(this::coverToVO).toArray(PicVO[]::new);
     }
 
     @Override
@@ -83,7 +89,7 @@ public class CosServiceImpl implements CosService {
     @Override
     public PicVO[] getRecommendPosts() {
         return picRepository.findAll()
-                .stream().filter(p -> p.getRecommend() == true)
+                .stream().filter(p -> p.getRecommend() == true && p.getDeleted().equals(false))
                 .map(this::coverToVO)
                 .toArray(PicVO[]::new);
     }
@@ -91,7 +97,7 @@ public class CosServiceImpl implements CosService {
     @Override
     public PicVO[] getBannerPosts() {
         return picRepository.findAll()
-                .stream().filter(p -> p.getBanner() == true)
+                .stream().filter(p -> p.getBanner() == true && p.getDeleted().equals(false))
                 .map(this::coverToVO)
                 .toArray(PicVO[]::new);
     }
@@ -158,6 +164,28 @@ public class CosServiceImpl implements CosService {
         return false;
     }
 
+    @Override
+    public PicVO[] getAllPicPosts() {
+        String useremail = BaseUserInfo.get("username");
+        UserDO user = userRepository.findByEmail(useremail).orElse(null);
+        if (user == null) {
+            return null;
+        }
+        return picRepository.findAll()
+                .stream().filter(p -> p.getCreator().equals(user
+                        .getUid()) && p.getDeleted().equals(false))
+                .map(this::coverToVO)
+                .toArray(PicVO[]::new);
+    }
+
+    @Override
+    public Boolean deletePic(String id) {
+        PicDO picDO = this.picRepository.findById(id).orElse(null);
+        picDO.setDeleted(true);
+        this.picRepository.save(picDO);
+        return true;
+    }
+
     private PicVO coverToVO(PicDO picDO) {
         PicVO picVO = new PicVO();
         picVO.setId(picDO.getId());
@@ -174,6 +202,8 @@ public class CosServiceImpl implements CosService {
         picVO.setLikeCount(picDO.getLikeCount());
         picVO.setClickCount(picDO.getClickCount());
         picVO.setShareCount(picDO.getShareCount());
+        picVO.setStatus(picDO.getStatus());
+        picVO.setStatus_desc(picDO.getStatus_desc());
         UserDO userDO = userRepository.findByUid(picDO.getCreator()).orElse(null);
         if (userDO != null) {
             picVO.setNickName(userDO.getNickname());

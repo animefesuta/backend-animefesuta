@@ -49,4 +49,10 @@ public class AiPostDO extends BaseDO {
     // 是否AI
     @Column(name = "post_pic_ai")
     private Boolean ai;
+    @Column(name = "post_pic_likecount")
+    private int likeCount;
+    @Column(name = "post_pic_sharecount")
+    private int shareCount;
+    @Column(name = "post_pic_clickcount")
+    private int clickCount;
 }

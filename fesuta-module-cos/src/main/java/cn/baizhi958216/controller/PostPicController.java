@@ -84,4 +84,9 @@ public class PostPicController {
         return cosService.shareCount(id);
     }
 
+    @GetMapping("/remove")
+    public Boolean removePic(@RequestParam String id) {
+        return cosService.deletePic(id);
+    }
+
 }
