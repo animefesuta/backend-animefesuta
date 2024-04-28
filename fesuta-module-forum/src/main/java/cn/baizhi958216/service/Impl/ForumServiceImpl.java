@@ -51,6 +51,7 @@ public class ForumServiceImpl implements ForumService {
         forumPostDO.setStatus(false);
         forumPostDO.setStatus_desc("");
         forumPostDO.setRecommend(false);
+        forumPostDO.setDeleted(false);
         forumPostDO.setImg(forumPostVO.getImg());
         forumRepository.save(forumPostDO);
         return convertToPostVO(forumPostDO);
@@ -61,9 +62,11 @@ public class ForumServiceImpl implements ForumService {
         ForumPostDO forumPostDO[] = forumRepository.findAllByTheme(theme);
         ForumPostVO forumPostVO[] = new ForumPostVO[forumPostDO.length];
         for (int i = 0; i < forumPostDO.length; i++) {
-            UserDO userDO = userRepository.findByUid(forumPostDO[i].getCreator()).orElse(null);
-            forumPostVO[i] = convertToPostVO(forumPostDO[i]);
-            forumPostVO[i].setNickname(userDO.getNickname());
+            if (forumPostDO[i].getDeleted().equals(false)) {
+                UserDO userDO = userRepository.findByUid(forumPostDO[i].getCreator()).orElse(null);
+                forumPostVO[i] = convertToPostVO(forumPostDO[i]);
+                forumPostVO[i].setNickname(userDO.getNickname());
+            }
         }
         return forumPostVO;
     }
@@ -155,6 +158,26 @@ public class ForumServiceImpl implements ForumService {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public ForumPostVO[] getAllPost() {
+        String useremail = BaseUserInfo.get("username");
+        UserDO user = userRepository.findByEmail(useremail).orElse(null);
+        if (user == null) {
+            return null;
+        }
+        return this.forumRepository.findAll().stream()
+                .filter(p -> p.getCreator().equals(user.getUid()) && p.getDeleted().equals(false))
+                .map(this::convertToPostVO)
+                .toArray(ForumPostVO[]::new);
+    }
+
+    public Boolean deletePost(String id) {
+        ForumPostDO forumPostDO = this.forumRepository.findById(id).orElse(null);
+        forumPostDO.setDeleted(true);
+        this.forumRepository.save(forumPostDO);
+        return true;
     }
 
     private ForumPostVO convertToPostVO(ForumPostDO forumPostDO) {

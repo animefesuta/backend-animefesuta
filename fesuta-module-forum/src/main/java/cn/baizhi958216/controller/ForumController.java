@@ -69,4 +69,14 @@ public class ForumController {
         return forumService.shareCount(id);
     }
 
+    @GetMapping("/getallpost")
+    public ForumPostVO[] getAllPost() {
+        return forumService.getAllPost();
+    }
+
+    @GetMapping("/deletepost")
+    public Boolean deletePost(@RequestParam String id) {
+        return forumService.deletePost(id);
+    }
+
 }

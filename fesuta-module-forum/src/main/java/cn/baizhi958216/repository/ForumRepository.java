@@ -12,6 +12,6 @@ public interface ForumRepository extends JpaRepository<ForumPostDO, Object> {
 
     ForumPostDO[] findAllByRecommend(Boolean recommend);
 
-    @Query(value = "SELECT * FROM fesuta_forum_post ORDER BY post_forum_clickcount DESC LIMIT ?1", nativeQuery = true)
+    @Query(value = "SELECT * FROM fesuta_forum_post WHERE deleted=false ORDER BY post_forum_clickcount DESC LIMIT ?1", nativeQuery = true)
     ForumPostDO[] findAllByClickCount(int count);
 }

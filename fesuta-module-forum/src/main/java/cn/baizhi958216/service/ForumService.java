@@ -22,4 +22,8 @@ public interface ForumService {
     Boolean likeCount(String id);
 
     Boolean shareCount(String id);
+
+    ForumPostVO[] getAllPost();
+
+    Boolean deletePost(String id);
 }
